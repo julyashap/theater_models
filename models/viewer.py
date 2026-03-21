@@ -1,14 +1,14 @@
 from typing_extensions import Annotated
 from pydantic import BaseModel, ConfigDict, Field
-from models.type_aliases import ModelID, NameSurname
+from models.type_aliases import ModelID, DisplayName
 
 
 class Viewer(BaseModel):
     """Модель зрителя."""
 
     id: ModelID
-    name: NameSurname
-    surname: NameSurname
+    name: DisplayName
+    surname: DisplayName
     email_address: Annotated[str, Field(pattern=r"[^@]+@[^@]+\.[^@]+")]
 
     ticket_number: Annotated[str, Field(min_length=8, max_length=8, pattern=r"^\d+$")]

@@ -12,7 +12,7 @@ ModelID = Annotated[
     )
 ]
 
-NameSurname = Annotated[
+DisplayName = Annotated[
     str, 
     Field(
         min_length=2, 

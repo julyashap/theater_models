@@ -3,14 +3,14 @@ from typing import Any, Literal
 from typing_extensions import Annotated
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from models.actor import Actor
-from models.type_aliases import ModelID, NameSurname
+from models.type_aliases import ModelID, DisplayName
 
 
 class Production(BaseModel):
     """Модель постановки."""
 
     id: ModelID
-    name: NameSurname
+    name: DisplayName
     genre: Literal["drama", "comedy", "musical", "tragedy", "other"]
     
     actors: list[Actor]

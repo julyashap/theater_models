@@ -1,7 +1,7 @@
 from typing import Any, ClassVar
 from typing_extensions import Annotated
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-from models.type_aliases import ModelID, NameSurname
+from models.type_aliases import ModelID, DisplayName
 
 PassportNumber = Annotated[
     str,
@@ -20,8 +20,8 @@ class Actor(BaseModel):
     REQUIRED_SKILLS: ClassVar[set[str]] = {"diction", "vocals", "plasticity"}
 
     id: ModelID
-    name: NameSurname
-    surname: NameSurname
+    name: DisplayName
+    surname: DisplayName
     passport_number: PassportNumber
 
     skills: dict[str, Annotated[int, Field(ge=0, le=10)]]

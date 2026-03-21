@@ -4,7 +4,7 @@ from typing_extensions import Annotated
 from pydantic import BaseModel, Field, ConfigDict, field_validator, computed_field
 from models.production import Production
 from models.viewer import Viewer
-from models.type_aliases import ModelID, NameSurname
+from models.type_aliases import ModelID, DisplayName
 
 
 class Performance(BaseModel):
@@ -12,7 +12,7 @@ class Performance(BaseModel):
 
     id: ModelID
     start_datetime: datetime
-    theater_name: NameSurname
+    theater_name: DisplayName
     count_tickets: Annotated[int, Field(gt=0)]
 
     viewers: list[Viewer]
