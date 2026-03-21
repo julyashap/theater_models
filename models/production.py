@@ -1,9 +1,13 @@
 from datetime import time
 from typing import Any, Literal
-from typing_extensions import Annotated
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
+from typing_extensions import Annotated
+
 from models.actor import Actor
-from models.type_aliases import ModelID, DisplayName
+from models.type_aliases import DisplayName, ModelID
+
+Description = Annotated[str | None, Field(default=None, min_length=10, max_length=500)]
 
 
 class Production(BaseModel):
@@ -12,10 +16,10 @@ class Production(BaseModel):
     id: ModelID
     name: DisplayName
     genre: Literal["drama", "comedy", "musical", "tragedy", "other"]
-    
+
     actors: list[Actor]
 
-    description: Annotated[str | None, Field(default=None, min_length=10, max_length=500)]
+    description: Description
     age_rating: Annotated[int, Field(default=0, ge=0, le=18)]
     duration: Annotated[time, Field(default=time(hour=1))]
     has_intermission: Annotated[bool, Field(default=True)]

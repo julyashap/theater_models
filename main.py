@@ -1,9 +1,11 @@
 from datetime import datetime, time
+
 from pydantic import ValidationError
+
 from models.actor import Actor
-from models.viewer import Viewer
-from models.production import Production
 from models.performance import Performance
+from models.production import Production
+from models.viewer import Viewer
 
 
 def create_valid_viewer() -> Viewer:
@@ -25,7 +27,7 @@ def create_invalid_viewer() -> None:
             surname="B",  # длина < 2
             email_address="wrong_email",  # некорректный email
             ticket_number="123",  # длина < 8
-            phone_number="89608596"  # некорректный телефон
+            phone_number="89608596",  # некорректный телефон
         )
     except ValidationError as e:
         print("\nViewer ValidationError")
@@ -38,12 +40,7 @@ def create_valid_actor() -> Actor:
         name="Ivan",
         surname="Petrov",
         passport_number="1234 567890",  # авто-очистка
-        skills={
-            "diction": 8,
-            "vocals": 7,
-            "plasticity": 9,
-            "tricks": 5  # доп ключ
-        },
+        skills={"diction": 8, "vocals": 7, "plasticity": 9, "tricks": 5},  # доп ключ
     )
 
 

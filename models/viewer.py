@@ -1,6 +1,11 @@
-from typing_extensions import Annotated
 from pydantic import BaseModel, ConfigDict, Field
-from models.type_aliases import ModelID, DisplayName
+from typing_extensions import Annotated
+
+from models.type_aliases import DisplayName, ModelID
+
+PhoneNumber = Annotated[
+    str | None, Field(default=None, pattern=r"^\+\d{1,3}\s?\d{4,14}$")
+]
 
 
 class Viewer(BaseModel):
@@ -13,6 +18,6 @@ class Viewer(BaseModel):
 
     ticket_number: Annotated[str, Field(min_length=8, max_length=8, pattern=r"^\d+$")]
 
-    phone_number: Annotated[str | None, Field(default=None, pattern=r"^\+\d{1,3}\s?\d{4,14}$")]
+    phone_number: PhoneNumber
 
     model_config = ConfigDict(str_strip_whitespace=True)

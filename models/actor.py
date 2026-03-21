@@ -1,16 +1,12 @@
 from typing import Any, ClassVar
-from typing_extensions import Annotated
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-from models.type_aliases import ModelID, DisplayName
+from typing_extensions import Annotated
+
+from models.type_aliases import DisplayName, ModelID
 
 PassportNumber = Annotated[
-    str,
-    Field(
-        min_length=10, 
-        max_length=10, 
-        pattern=r"^\d+$", 
-        exclude=True
-    )
+    str, Field(min_length=10, max_length=10, pattern=r"^\d+$", exclude=True)
 ]
 
 
@@ -42,7 +38,5 @@ class Actor(BaseModel):
         """Проверяет наличие обязательных навыков."""
         missing = cls.REQUIRED_SKILLS - set(v.keys())
         if missing:
-            raise ValueError(
-                f"Keys {missing} are required!"
-            )
+            raise ValueError(f"Keys {missing} are required!")
         return v

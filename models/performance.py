@@ -1,10 +1,12 @@
 from datetime import datetime
 from typing import Any
+
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
 from typing_extensions import Annotated
-from pydantic import BaseModel, Field, ConfigDict, field_validator, computed_field
+
 from models.production import Production
+from models.type_aliases import DisplayName, ModelID
 from models.viewer import Viewer
-from models.type_aliases import ModelID, DisplayName
 
 
 class Performance(BaseModel):
@@ -29,7 +31,7 @@ class Performance(BaseModel):
         if len(v) != len({viewer.id for viewer in v}):
             raise ValueError("Viewers must be unique!")
         return v
-    
+
     @computed_field
     def avaliable_tickets(self) -> int:
         """Вычисляет количество оставшихся билетов."""
