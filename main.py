@@ -127,8 +127,8 @@ def main():
     print(f"\nPerformance:\n{performance}")
 
     print("\nНЕУДАЧНОЕ ВЫПОЛНЕНИЕ")
-    create_invalid_actor()
     create_invalid_viewer()
+    create_invalid_actor()
     create_invalid_production(actor)
     create_invalid_performance(production, viewer)
 
