@@ -1,4 +1,4 @@
-from models.performance import Performance
+from ..models.performance import Performance
 
 
 def validate_performance(performance: Performance) -> None:
