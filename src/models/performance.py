@@ -4,9 +4,9 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator, model_validator
 from typing_extensions import Annotated
 
-from models.production import Production
-from models.type_aliases import DisplayName, ModelID
-from models.viewer import Viewer
+from .production import Production
+from .type_aliases import DisplayName, ModelID
+from .viewer import Viewer
 
 
 class Performance(BaseModel):
@@ -33,11 +33,12 @@ class Performance(BaseModel):
             raise ValueError("Viewers must be unique!")
         return v
 
-    @model_validator
+    @model_validator(mode="after")
     def check_count_viewers(self) -> 'Performance':
         """Проверяет, что количество зрителей не больше количества билетов."""
         if len(self.viewers) > self.count_tickets:
             raise ValueError("Count viewers must be less or equal than count tickets!")
+        return self
 
     @computed_field
     def available_tickets(self) -> int:
