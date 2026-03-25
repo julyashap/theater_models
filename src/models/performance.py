@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator, model_validator
 from typing_extensions import Annotated
 
 from models.production import Production
@@ -33,6 +33,12 @@ class Performance(BaseModel):
             raise ValueError("Viewers must be unique!")
         return v
 
+    @model_validator
+    def check_count_viewers(self) -> 'Performance':
+        """Проверяет, что количество зрителей не больше количества билетов."""
+        if len(self.viewers) > self.count_tickets:
+            raise ValueError("Count viewers must be less or equal than count tickets!")
+
     @computed_field
     def available_tickets(self) -> int:
         """Вычисляет количество оставшихся билетов."""
@@ -40,16 +46,18 @@ class Performance(BaseModel):
 
     def add_viewer(self, viewer: Viewer) -> None:
         """Добавляет одного зрителя в список."""
-        self._check_unique_viewer(viewer)
+        self._validate_viewer_adding(viewer)
         self.viewers.append(viewer)
 
     def add_viewers(self, viewers: list[Viewer]) -> None:
         """Добавляет несколько зрителей в список."""
         for viewer in viewers:
-            self._check_unique_viewer(viewer)
+            self._validate_viewer_adding(viewer)
         self.viewers.extend(viewers)
 
-    def _check_unique_viewer(self, viewer: Viewer) -> None:
-        """Проверяет, есть ли уже зритель в списке."""
+    def _validate_viewer_adding(self, viewer: Viewer) -> None:
+        """Проверяет, можно ли добавить зрителя в список."""
+        if len(self.viewers) + 1 > self.count_tickets:
+            raise ValueError(f"Viewer {viewer.id} doesn't fit, no tickets available!")
         if viewer in self.viewers:
-            raise ValueError("Viewer {viewer.id} already exists in Performance {self.id}}!")
+            raise ValueError(f"Viewer {viewer.id} already exists in Performance {self.id}!")
