@@ -8,7 +8,7 @@ def person_data() -> dict[str, int | str]:
     """"""
     return {
         "id": 1,
-        "name": "Name",
+        "name": "  Name  ",
         "surname": "Surname",
         "email_address": "example@mail.com",
         "phone_number": "+79171985623",
