@@ -1,7 +1,7 @@
 from pydantic import Field
 from typing_extensions import Annotated
 
-from models.person import Person
+from .person import Person
 
 
 class Viewer(Person):

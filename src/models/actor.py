@@ -3,8 +3,8 @@ from typing import Any
 from pydantic import Field, field_validator
 from typing_extensions import Annotated
 
-from models.person import Person
-from models.type_aliases import Skills
+from .person import Person
+from .type_aliases import Skills
 
 
 class Actor(Person):
