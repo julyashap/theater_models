@@ -1,24 +1,18 @@
-from typing import Any, ClassVar
+from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import Field, field_validator
 from typing_extensions import Annotated
 
-from models.type_aliases import DisplayName, ModelID
+from models.person import Person
+from models.type_aliases import Skills
 
 
-class Actor(BaseModel):
+class Actor(Person):
     """Модель актера."""
 
-    REQUIRED_SKILLS: ClassVar[set[str]] = {"diction", "vocals", "plasticity"}
-
-    id: ModelID
-    name: DisplayName
-    surname: DisplayName
     passport_number: Annotated[str, Field(pattern=r"^\d{10}$")]
 
-    skills: dict[str, Annotated[int, Field(ge=0, le=10)]]
-
-    model_config = ConfigDict(str_strip_whitespace=True)
+    skills: Skills
 
     @field_validator("passport_number", mode="before")
     @classmethod
@@ -26,13 +20,4 @@ class Actor(BaseModel):
         """Убирает пробел в номере паспорта."""
         if isinstance(v, str):
             v = v.replace(" ", "")
-        return v
-
-    @field_validator("skills")
-    @classmethod
-    def check_required_skills(cls, v: Any) -> Any:
-        """Проверяет наличие обязательных навыков."""
-        missing = cls.REQUIRED_SKILLS - set(v.keys())
-        if missing:
-            raise ValueError(f"Keys {missing} are required!")
         return v
