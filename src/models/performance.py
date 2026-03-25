@@ -1,7 +1,14 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    computed_field,
+    field_validator,
+    model_validator,
+)
 from typing_extensions import Annotated
 
 from .production import Production
@@ -34,7 +41,7 @@ class Performance(BaseModel):
         return v
 
     @model_validator(mode="after")
-    def check_count_viewers(self) -> 'Performance':
+    def check_count_viewers(self) -> "Performance":
         """Проверяет, что количество зрителей не больше количества билетов."""
         if len(self.viewers) > self.count_tickets:
             raise ValueError("Count viewers must be less or equal than count tickets!")
@@ -61,4 +68,6 @@ class Performance(BaseModel):
         if len(self.viewers) + 1 > self.count_tickets:
             raise ValueError(f"Viewer {viewer.id} doesn't fit, no tickets available!")
         if viewer in self.viewers:
-            raise ValueError(f"Viewer {viewer.id} already exists in Performance {self.id}!")
+            raise ValueError(
+                f"Viewer {viewer.id} already exists in Performance {self.id}!"
+            )

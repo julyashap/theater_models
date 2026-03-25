@@ -1,7 +1,7 @@
+from datetime import time
 from typing import Any
 
 import pytest
-from datetime import time
 
 from src.models.actor import Actor
 from src.models.production import Production
@@ -35,19 +35,23 @@ def test_valid_production_all_fields(production_data: dict[str, Any]) -> None:
     assert production.cast["Hamlet"].name == "John"
 
 
-def test_add_actor_success(production_data: dict[str, Any], actor_sample: Actor) -> None:
+def test_add_actor_success(
+    production_data: dict[str, Any], actor_sample: Actor
+) -> None:
     """"""
     production_data["roles"] = {"Lead": {"acting": 5}, "Supporting": {"acting": 3}}
     production_data["cast"] = {}
     production = Production(**production_data)
 
     production.add_actor("Lead", actor_sample)
-    
+
     assert "Lead" in production.cast
     assert production.cast["Lead"].id == actor_sample.id
 
 
-def test_add_actor_unknown_role(production_data: dict[str, Any], actor_sample: Actor) -> None:
+def test_add_actor_unknown_role(
+    production_data: dict[str, Any], actor_sample: Actor
+) -> None:
     """"""
     production = Production(**production_data)
 
@@ -57,7 +61,9 @@ def test_add_actor_unknown_role(production_data: dict[str, Any], actor_sample: A
     assert "Unknown role" in str(exc_info.value)
 
 
-def test_add_actor_insufficient_skills(production_data: dict[str, Any], actor_sample: Actor) -> None:
+def test_add_actor_insufficient_skills(
+    production_data: dict[str, Any], actor_sample: Actor
+) -> None:
     """"""
     production_data["roles"] = {"Lead": {"acting": 10}}
     production_data["cast"] = {}
@@ -69,7 +75,9 @@ def test_add_actor_insufficient_skills(production_data: dict[str, Any], actor_sa
     assert "does not fit role" in str(exc_info.value)
 
 
-def test_validate_cast_missing_roles(production_data: dict[str, Any], actor_sample: Actor) -> None:
+def test_validate_cast_missing_roles(
+    production_data: dict[str, Any], actor_sample: Actor
+) -> None:
     """"""
     production = Production(**production_data)
 

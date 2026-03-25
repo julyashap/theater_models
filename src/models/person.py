@@ -1,12 +1,9 @@
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, EmailStr
+from .type_aliases import DisplayName, ModelID
 
-from .type_aliases import ModelID, DisplayName
-
-PhoneNumber = Annotated[
-    str, Field(default="", pattern=r"^\+\d{1,3}\s?\d{4,14}$")
-]
+PhoneNumber = Annotated[str, Field(default="", pattern=r"^\+\d{1,3}\s?\d{4,14}$")]
 
 
 class Person(BaseModel):

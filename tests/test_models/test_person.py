@@ -39,9 +39,9 @@ def test_invalid_person_required_fields(person_data: dict[str, int | str]) -> No
     """"""
     person_data.pop("name")
 
-    with pytest.raises(ValueError) as exc_info:  
-        Person(**person_data) 
-    
+    with pytest.raises(ValueError) as exc_info:
+        Person(**person_data)
+
     str_exc_value = str(exc_info.value)
     assert "name" in str_exc_value
     assert "Field required" in str_exc_value
@@ -52,9 +52,9 @@ def test_invalid_person_display_name(person_data: dict[str, int | str]) -> None:
     person_data["name"] = ""
     person_data["surname"] = ""
 
-    with pytest.raises(ValueError) as exc_info:  
-        Person(**person_data) 
-    
+    with pytest.raises(ValueError) as exc_info:
+        Person(**person_data)
+
     str_exc_value = str(exc_info.value)
     assert "name" in str_exc_value
     assert "surname" in str_exc_value
@@ -65,9 +65,9 @@ def test_invalid_person_email_address(person_data: dict[str, int | str]) -> None
     """"""
     person_data["email_address"] = "invalid_email"
 
-    with pytest.raises(ValueError) as exc_info:  
-        Person(**person_data) 
-    
+    with pytest.raises(ValueError) as exc_info:
+        Person(**person_data)
+
     str_exc_value = str(exc_info.value)
     assert "email_address" in str_exc_value
     assert "value is not a valid email address" in str_exc_value

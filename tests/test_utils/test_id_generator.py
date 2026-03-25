@@ -16,5 +16,5 @@ def test_get_id_counter() -> None:
 
     for i in range(5):
         expected_id = i + 1
-        
+
         assert id_generator.get_id() == expected_id

@@ -12,7 +12,4 @@ def can_play_role(actor: Actor, required_skills: Skills) -> bool:
 
 def filter_actors_for_role(actors: list[Actor], required_skills: Skills) -> list[Actor]:
     """Фильтрует актеров по необходимым для роли навыкам."""
-    return [
-        actor for actor in actors
-        if can_play_role(actor, required_skills)
-    ]
+    return [actor for actor in actors if can_play_role(actor, required_skills)]

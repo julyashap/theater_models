@@ -26,7 +26,9 @@ def test_valid_viewer_all_fields(viewer_data: dict[str, int | str]) -> None:
     assert viewer.ticket_number == "12345678"
 
 
-def test_invalid_viewer_ticket_number_pattern(viewer_data: dict[str, int | str]) -> None:
+def test_invalid_viewer_ticket_number_pattern(
+    viewer_data: dict[str, int | str],
+) -> None:
     """"""
     viewer_data["ticket_number"] = "1234ABCD"
 

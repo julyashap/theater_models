@@ -1,7 +1,8 @@
 import pytest
-from src.models.production import Production
+
 from src.models.actor import Actor
-from src.services.production import get_missing_roles, get_cast_list, get_actor_by_role
+from src.models.production import Production
+from src.services.production import get_actor_by_role, get_cast_list, get_missing_roles
 
 
 def test_get_missing_roles(production_sample: Production) -> None:
@@ -14,7 +15,7 @@ def test_get_missing_roles(production_sample: Production) -> None:
 def test_get_cast_list(production_sample: Production, actor_sample: Actor) -> None:
     """"""
     cast_list = get_cast_list(production_sample)
-    
+
     assert cast_list == [actor_sample]
 
 

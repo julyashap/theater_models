@@ -1,8 +1,8 @@
 import pytest
 
 from src.models.actor import Actor
-from src.services.actor import can_play_role, filter_actors_for_role
 from src.models.type_aliases import Skills
+from src.services.actor import can_play_role, filter_actors_for_role
 
 
 @pytest.fixture
@@ -22,21 +22,21 @@ def actor_weak() -> Actor:
 def test_can_play_role_success(actor_sample: Actor) -> None:
     """"""
     required = {"acting": 5}
-    
+
     assert can_play_role(actor_sample, required) is True
 
 
 def test_can_play_role_fail(actor_sample: Actor) -> None:
     """"""
     required = {"acting": 9}
-    
+
     assert can_play_role(actor_sample, required) is False
 
 
 def test_can_play_role_missing_skill(actor_sample: Actor) -> None:
     """"""
     required = {"dancing": 1}
-    
+
     assert can_play_role(actor_sample, required) is False
 
 

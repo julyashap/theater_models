@@ -45,9 +45,9 @@ def test_invalid_actor_passport_number(actor_data: dict[str, Any]) -> None:
 def test_actor_passport_number_autoformat(actor_data: dict[str, Any]) -> None:
     """"""
     actor_data["passport_number"] = "12 34 56 78 90"
-    
+
     actor = Actor(**actor_data)
-    
+
     assert actor.passport_number == "1234567890"
 
 

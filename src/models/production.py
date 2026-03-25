@@ -82,14 +82,24 @@ class Production(BaseModel):
 
     def _format_description(self) -> str:
         """Возвращает отформатированное описание."""
-        return self.description if len(self.description) <= 97 else self.description[:97] + "..."
+        return (
+            self.description
+            if len(self.description) <= 97
+            else self.description[:97] + "..."
+        )
 
     def __str__(self) -> str:
         """Переопределяет запись поля описания в строковом представлении."""
         base = super().__str__()
-        return base.replace(f"description={self.description!r}", f"description={self._format_description()!r}")
+        return base.replace(
+            f"description={self.description!r}",
+            f"description={self._format_description()!r}",
+        )
 
     def __repr__(self) -> str:
         """Переопределяет запись поля описания в строке для разработчика."""
         base = super().__repr__()
-        return base.replace(f"description={self.description!r}", f"description={self._format_description()!r}")
+        return base.replace(
+            f"description={self.description!r}",
+            f"description={self._format_description()!r}",
+        )
