@@ -1,5 +1,5 @@
-from models.actor import Actor
-from models.type_aliases import Skills
+from ..models.actor import Actor
+from ..models.type_aliases import Skills
 
 
 def can_play_role(actor: Actor, required_skills: Skills) -> bool:
