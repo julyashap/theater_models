@@ -5,10 +5,6 @@ from typing_extensions import Annotated
 
 from models.type_aliases import DisplayName, ModelID
 
-PassportNumber = Annotated[
-    str, Field(min_length=10, max_length=10, pattern=r"^\d+$", exclude=True)
-]
-
 
 class Actor(BaseModel):
     """Модель актера."""
@@ -18,7 +14,7 @@ class Actor(BaseModel):
     id: ModelID
     name: DisplayName
     surname: DisplayName
-    passport_number: PassportNumber
+    passport_number: Annotated[str, Field(pattern=r"^\d{10}$")]
 
     skills: dict[str, Annotated[int, Field(ge=0, le=10)]]
 
