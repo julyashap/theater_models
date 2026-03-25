@@ -10,3 +10,5 @@ ModelID = Annotated[
 ]
 
 DisplayName = Annotated[str, Field(min_length=1)]
+
+Skills = dict[str, Annotated[int, Field(ge=0, le=10)]]
