@@ -7,4 +7,4 @@ ModelID = Annotated[
     str, Field(min_length=4, max_length=4, default_factory=lambda: uuid4().hex[:4])
 ]
 
-DisplayName = Annotated[str, Field(min_length=2, max_length=100)]
+DisplayName = Annotated[str, Field(min_length=1)]
