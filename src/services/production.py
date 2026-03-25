@@ -1,5 +1,5 @@
-from models.production import Production
-from models.actor import Actor
+from ..models.production import Production
+from ..models.actor import Actor
 
 
 def get_missing_roles(production: Production) -> set[str]:
