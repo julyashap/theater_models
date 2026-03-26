@@ -1,6 +1,6 @@
-from src.models.actor import Actor
-from src.models.production import Production
-from src.services.production import get_actor_by_role, get_cast_list, get_missing_roles
+from src.theater.models.actor import Actor
+from src.theater.models.production import Production
+from src.theater.services.production import get_actor_by_role, get_cast_list, get_missing_roles
 
 
 def test_get_missing_roles(production_sample: Production) -> None:

@@ -1,8 +1,8 @@
 import pytest
 
-from src.models.actor import Actor
-from src.models.production import Production
-from src.utils.id_generator import IDGenerator
+from src.theater.models.actor import Actor
+from src.theater.models.production import Production
+from src.theater.utils.id_generator import IDGenerator
 
 
 @pytest.fixture(autouse=True)
