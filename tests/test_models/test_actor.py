@@ -7,7 +7,7 @@ from src.models.actor import Actor
 
 @pytest.fixture
 def actor_data() -> dict[str, Any]:
-    """"""
+    """Данные для создания Actor."""
     return {
         "id": 1,
         "name": "Name",
@@ -20,7 +20,7 @@ def actor_data() -> dict[str, Any]:
 
 
 def test_valid_actor_all_fields(actor_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет создание модели с корректными данными."""
     actor = Actor(**actor_data)
 
     assert actor.id == 1
@@ -31,7 +31,7 @@ def test_valid_actor_all_fields(actor_data: dict[str, Any]) -> None:
 
 
 def test_invalid_actor_passport_number(actor_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс исключения при некорректном номере паспорта."""
     actor_data["passport_number"] = "1234 ABCD"
 
     with pytest.raises(ValueError) as exc_info:
@@ -43,7 +43,7 @@ def test_invalid_actor_passport_number(actor_data: dict[str, Any]) -> None:
 
 
 def test_actor_passport_number_autoformat(actor_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет автоматическое форматирование номера паспорта."""
     actor_data["passport_number"] = "12 34 56 78 90"
 
     actor = Actor(**actor_data)
@@ -52,7 +52,7 @@ def test_actor_passport_number_autoformat(actor_data: dict[str, Any]) -> None:
 
 
 def test_invalid_actor_skills_range(actor_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс ошибки при недопустимом уровне навыка."""
     actor_data["skills"]["acting"] = 15
 
     with pytest.raises(ValueError) as exc_info:
@@ -64,7 +64,7 @@ def test_invalid_actor_skills_range(actor_data: dict[str, Any]) -> None:
 
 
 def test_invalid_actor_skills_type(actor_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс исключения при некорректном значении навыка."""
     actor_data["skills"]["acting"] = "high"
 
     with pytest.raises(ValueError) as exc_info:
