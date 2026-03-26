@@ -1,6 +1,6 @@
 import pytest
 
-from src.models.viewer import Viewer
+from src.theater.models.viewer import Viewer
 
 
 @pytest.fixture

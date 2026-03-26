@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 
-from src.models.actor import Actor
-from src.models.production import Production
+from src.theater.models.actor import Actor
+from src.theater.models.production import Production
 
 
 @pytest.fixture

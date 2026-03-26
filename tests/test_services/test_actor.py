@@ -1,7 +1,7 @@
 import pytest
 
-from src.models.actor import Actor
-from src.services.actor import can_play_role, filter_actors_for_role
+from src.theater.models.actor import Actor
+from src.theater.services.actor import can_play_role, filter_actors_for_role
 
 
 @pytest.fixture

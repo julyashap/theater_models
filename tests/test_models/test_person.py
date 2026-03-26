@@ -1,6 +1,6 @@
 import pytest
 
-from src.models.person import Person
+from src.theater.models.person import Person
 
 
 @pytest.fixture

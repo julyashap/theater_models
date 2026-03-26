@@ -3,9 +3,9 @@ from typing import Any
 
 import pytest
 
-from src.models.performance import Performance
-from src.models.production import Production
-from src.models.viewer import Viewer
+from src.theater.models.performance import Performance
+from src.theater.models.production import Production
+from src.theater.models.viewer import Viewer
 
 
 @pytest.fixture

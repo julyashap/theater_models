@@ -1,4 +1,4 @@
-from src.utils.id_generator import IDGenerator
+from src.theater.utils.id_generator import IDGenerator
 
 
 def test_single_instance() -> None:

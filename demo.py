@@ -1,6 +1,6 @@
 from datetime import datetime, time
 
-from src import (
+from src.theater import (
     Actor,
     Performance,
     Production,
