@@ -7,7 +7,7 @@ from src.services.actor import can_play_role, filter_actors_for_role
 
 @pytest.fixture
 def actor_weak() -> Actor:
-    """"""
+    """Объект Actor с низкими навыками."""
     return Actor(
         id=2,
         name="Weak",
@@ -20,28 +20,28 @@ def actor_weak() -> Actor:
 
 
 def test_can_play_role_success(actor_sample: Actor) -> None:
-    """"""
+    """Проверяет успешный случай, когда актер подходит на роль."""
     required = {"acting": 5}
 
     assert can_play_role(actor_sample, required) is True
 
 
 def test_can_play_role_fail(actor_sample: Actor) -> None:
-    """"""
+    """Проверяет случай, когда актер не подходит на роль."""
     required = {"acting": 9}
 
     assert can_play_role(actor_sample, required) is False
 
 
 def test_can_play_role_missing_skill(actor_sample: Actor) -> None:
-    """"""
+    """Проверяет случай, когда у актера нет нужного навыка."""
     required = {"dancing": 1}
 
     assert can_play_role(actor_sample, required) is False
 
 
 def test_filter_actors_for_role(actor_sample: Actor, actor_weak: Actor) -> None:
-    """"""
+    """Проверяет фильтрацию актеров, подходящих на роль."""
     actors = [actor_sample, actor_weak]
     required = {"acting": 5}
     filtered = filter_actors_for_role(actors, required)

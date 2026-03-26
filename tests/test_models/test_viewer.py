@@ -5,7 +5,7 @@ from src.models.viewer import Viewer
 
 @pytest.fixture
 def viewer_data() -> dict[str, int | str]:
-    """"""
+    """Данные для создания Viewer."""
     return {
         "id": 1,
         "name": "Name",
@@ -17,7 +17,7 @@ def viewer_data() -> dict[str, int | str]:
 
 
 def test_valid_viewer_all_fields(viewer_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет создание модели при корректных данных."""
     viewer = Viewer(**viewer_data)
 
     assert viewer.id == 1
@@ -29,7 +29,7 @@ def test_valid_viewer_all_fields(viewer_data: dict[str, int | str]) -> None:
 def test_invalid_viewer_ticket_number_pattern(
     viewer_data: dict[str, int | str],
 ) -> None:
-    """"""
+    """Проверяет выброс ошибки при некорректном номере билета."""
     viewer_data["ticket_number"] = "1234ABCD"
 
     with pytest.raises(ValueError) as exc_info:

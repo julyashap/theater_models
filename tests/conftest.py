@@ -7,14 +7,14 @@ from src.utils.id_generator import IDGenerator
 
 @pytest.fixture(autouse=True)
 def reset_id_generator() -> None:
-    """"""
+    """Сбрасывает счетик для тестов."""
     IDGenerator.instance = None
     IDGenerator.counter = 0
 
 
 @pytest.fixture
 def actor_sample() -> Actor:
-    """"""
+    """Простой объект Actor."""
     return Actor(
         id=1,
         name="John",
@@ -28,7 +28,7 @@ def actor_sample() -> Actor:
 
 @pytest.fixture
 def production_sample(actor_sample: Actor) -> Production:
-    """"""
+    """Простой объект Production."""
     return Production(
         id=1,
         name="Hamlet",

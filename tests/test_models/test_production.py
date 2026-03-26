@@ -10,7 +10,7 @@ from src.models.type_aliases import Skills
 
 @pytest.fixture
 def production_data(actor_sample: Actor) -> dict[str, Any]:
-    """"""
+    """Данные для создания Production."""
     return {
         "id": 1,
         "name": "Hamlet",
@@ -25,7 +25,7 @@ def production_data(actor_sample: Actor) -> dict[str, Any]:
 
 
 def test_valid_production_all_fields(production_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет создание модели при корректных данных."""
     production = Production(**production_data)
 
     assert production.id == 1
@@ -38,7 +38,7 @@ def test_valid_production_all_fields(production_data: dict[str, Any]) -> None:
 def test_add_actor_success(
     production_data: dict[str, Any], actor_sample: Actor
 ) -> None:
-    """"""
+    """Проверяет успешное добавление актера."""
     production_data["roles"] = {"Lead": {"acting": 5}, "Supporting": {"acting": 3}}
     production_data["cast"] = {}
     production = Production(**production_data)
@@ -52,7 +52,7 @@ def test_add_actor_success(
 def test_add_actor_unknown_role(
     production_data: dict[str, Any], actor_sample: Actor
 ) -> None:
-    """"""
+    """Проверяет выброс ошибки при неизвестной роли."""
     production = Production(**production_data)
 
     with pytest.raises(ValueError) as exc_info:
@@ -64,7 +64,7 @@ def test_add_actor_unknown_role(
 def test_add_actor_insufficient_skills(
     production_data: dict[str, Any], actor_sample: Actor
 ) -> None:
-    """"""
+    """Проверяет выброс ошибки при несоответствии актера роли."""
     production_data["roles"] = {"Lead": {"acting": 10}}
     production_data["cast"] = {}
     production = Production(**production_data)
@@ -78,7 +78,7 @@ def test_add_actor_insufficient_skills(
 def test_validate_cast_missing_roles(
     production_data: dict[str, Any], actor_sample: Actor
 ) -> None:
-    """"""
+    """Проверяет выброс ошибки при несоответствии ролей и каста актеров."""
     production = Production(**production_data)
 
     with pytest.raises(ValueError) as exc_info:
@@ -88,7 +88,7 @@ def test_validate_cast_missing_roles(
 
 
 def test_format_genre_lowercase(production_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет корректность форматирования жанра в нижний регистр."""
     production_data["genre"] = "TrAgEdY"
     production = Production(**production_data)
 
@@ -96,7 +96,7 @@ def test_format_genre_lowercase(production_data: dict[str, Any]) -> None:
 
 
 def test_description_formatting(production_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет корректность форматирования описания в методах вывода."""
     production_data["description"] = "A" * 200
     production = Production(**production_data)
 
@@ -106,7 +106,7 @@ def test_description_formatting(production_data: dict[str, Any]) -> None:
 
 
 def test_cast_auto_validation_on_post_init(actor_sample: Actor) -> None:
-    """"""
+    """Проверяет корректность валидации поля cast в post_init."""
     production = Production(
         name="Show",
         genre="comedy",

@@ -5,7 +5,7 @@ from src.models.person import Person
 
 @pytest.fixture
 def person_data() -> dict[str, int | str]:
-    """"""
+    """Данные для создания Person."""
     return {
         "id": 1,
         "name": "  Name  ",
@@ -16,7 +16,7 @@ def person_data() -> dict[str, int | str]:
 
 
 def test_valid_person_all_fields(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет создание модели при корректных данных."""
     person = Person(**person_data)
 
     assert person.id == 1
@@ -25,7 +25,7 @@ def test_valid_person_all_fields(person_data: dict[str, int | str]) -> None:
 
 
 def test_valid_person_default_fields(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет корректность заполнения полей дефолтами."""
     person_data.pop("id")
     person_data.pop("phone_number")
 
@@ -36,7 +36,7 @@ def test_valid_person_default_fields(person_data: dict[str, int | str]) -> None:
 
 
 def test_invalid_person_required_fields(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет выброс ошибки при отсутствии обязательных полей."""
     person_data.pop("name")
 
     with pytest.raises(ValueError) as exc_info:
@@ -48,7 +48,7 @@ def test_invalid_person_required_fields(person_data: dict[str, int | str]) -> No
 
 
 def test_invalid_person_display_name(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет выброс ошибки при пустых значениях имен."""
     person_data["name"] = ""
     person_data["surname"] = ""
 
@@ -62,7 +62,7 @@ def test_invalid_person_display_name(person_data: dict[str, int | str]) -> None:
 
 
 def test_invalid_person_email_address(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет выброс ошибки при некорректном email-адресе."""
     person_data["email_address"] = "invalid_email"
 
     with pytest.raises(ValueError) as exc_info:
@@ -74,7 +74,7 @@ def test_invalid_person_email_address(person_data: dict[str, int | str]) -> None
 
 
 def test_invalid_person_phone_number(person_data: dict[str, int | str]) -> None:
-    """"""
+    """Проверяет выброс ошибки при некорректном номере телефона."""
     person_data["phone_number"] = "123456"
 
     with pytest.raises(ValueError) as exc_info:

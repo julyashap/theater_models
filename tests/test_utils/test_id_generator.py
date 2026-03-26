@@ -1,8 +1,8 @@
 from src.utils.id_generator import IDGenerator
 
 
-def test_one_instance() -> None:
-    """"""
+def test_single_instance() -> None:
+    """Проверяет создание единственного экземпляра."""
     id_generator = IDGenerator()
 
     id_generator_2 = IDGenerator()
@@ -11,7 +11,7 @@ def test_one_instance() -> None:
 
 
 def test_get_id_counter() -> None:
-    """"""
+    """Проверяет корректность работы счетчика."""
     id_generator = IDGenerator()
 
     for i in range(5):

@@ -12,7 +12,7 @@ from src.models.viewer import Viewer
 
 @pytest.fixture
 def viewer_sample() -> Viewer:
-    """"""
+    """Простой объект Viewer."""
     return Viewer(
         id=1,
         name="Alice",
@@ -25,7 +25,7 @@ def viewer_sample() -> Viewer:
 
 @pytest.fixture
 def performance_data(production_sample: Production) -> dict[str, Any]:
-    """"""
+    """Данные для создания Performance."""
     return {
         "id": 1,
         "start_datetime": datetime.now() + timedelta(days=1),
@@ -37,7 +37,7 @@ def performance_data(production_sample: Production) -> dict[str, Any]:
 
 
 def test_valid_performance_all_fields(performance_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет создание модели при корректных данных."""
     performance = Performance(**performance_data)
 
     assert performance.id == 1
@@ -50,7 +50,7 @@ def test_valid_performance_all_fields(performance_data: dict[str, Any]) -> None:
 def test_add_viewer_success(
     performance_data: dict[str, Any], viewer_sample: Viewer
 ) -> None:
-    """"""
+    """Проверяет успешное добавление зрителя."""
     performance = Performance(**performance_data)
 
     performance.add_viewer(viewer_sample)
@@ -63,7 +63,7 @@ def test_add_viewer_success(
 def test_add_viewers_success(
     performance_data: dict[str, Any], viewer_sample: Viewer
 ) -> None:
-    """"""
+    """Проверяет успешное добавление нескольких зрителей."""
     performance = Performance(**performance_data)
     viewer_2 = Viewer(
         id=2,
@@ -81,7 +81,7 @@ def test_add_viewers_success(
 
 
 def test_add_viewer_exceed_tickets(performance_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс ошибки при переполнении зрителей при добавлении."""
     performance = Performance(**performance_data)
     for i in range(5):
         performance.add_viewer(
@@ -111,7 +111,7 @@ def test_add_viewer_exceed_tickets(performance_data: dict[str, Any]) -> None:
 def test_add_viewer_duplicate(
     performance_data: dict[str, Any], viewer_sample: Viewer
 ) -> None:
-    """"""
+    """Проверяет выброс ошибки при повторном добавлении того же зрителя."""
     performance = Performance(**performance_data)
     performance.add_viewer(viewer_sample)
 
@@ -122,7 +122,7 @@ def test_add_viewer_duplicate(
 
 
 def test_unique_viewers_validation(performance_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс ошибки при неуникальном списке зрителей."""
     viewer_1 = Viewer(
         id=1,
         name="Alice",
@@ -148,7 +148,7 @@ def test_unique_viewers_validation(performance_data: dict[str, Any]) -> None:
 
 
 def test_count_viewers_not_exceed_tickets(performance_data: dict[str, Any]) -> None:
-    """"""
+    """Проверяет выброс ошибки при переполнении зрителей при создании."""
     viewers = [
         Viewer(
             name=f"V{i}",
@@ -172,7 +172,7 @@ def test_count_viewers_not_exceed_tickets(performance_data: dict[str, Any]) -> N
 def test_available_tickets(
     performance_data: dict[str, Any], viewer_sample: Viewer
 ) -> None:
-    """"""
+    """Проверяет корректность работы вычисляемого поля."""
     performance = Performance(**performance_data)
     assert performance.available_tickets == 5
 
