@@ -5,7 +5,6 @@ import pytest
 
 from src.models.actor import Actor
 from src.models.production import Production
-from src.models.type_aliases import Skills
 
 
 @pytest.fixture

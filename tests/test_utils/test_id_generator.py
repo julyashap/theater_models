@@ -10,6 +10,14 @@ def test_single_instance() -> None:
     assert id_generator is id_generator_2
 
 
+def test_counter_instance_attribute() -> None:
+    """Проверяет, что поле counter является атрибутом экземпляра."""
+    id_generator = IDGenerator()
+
+    assert not hasattr(IDGenerator, "counter")
+    assert id_generator.counter == 0
+
+
 def test_get_id_counter() -> None:
     """Проверяет корректность работы счетчика."""
     id_generator = IDGenerator()

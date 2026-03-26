@@ -7,7 +7,7 @@ from typing_extensions import Annotated
 from .actor import Actor
 from .type_aliases import DisplayName, ModelID, Skills
 
-Description = Annotated[str, Field(default="", min_length=1)]
+Description = Annotated[str | None, Field(default=None, min_length=1)]
 
 
 class Production(BaseModel):
@@ -82,6 +82,8 @@ class Production(BaseModel):
 
     def _format_description(self) -> str:
         """Возвращает отформатированное описание."""
+        if self.description is None:
+            return ""
         return (
             self.description
             if len(self.description) <= 97

@@ -3,10 +3,8 @@ from typing import Any
 
 import pytest
 
-from src.models.actor import Actor
 from src.models.performance import Performance
 from src.models.production import Production
-from src.models.type_aliases import Skills
 from src.models.viewer import Viewer
 
 
