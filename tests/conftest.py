@@ -9,7 +9,6 @@ from src.utils.id_generator import IDGenerator
 def reset_id_generator() -> None:
     """Сбрасывает счетик для тестов."""
     IDGenerator.instance = None
-    IDGenerator.counter = 0
 
 
 @pytest.fixture
