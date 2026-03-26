@@ -1,7 +1,6 @@
 import pytest
 
 from src.models.actor import Actor
-from src.models.type_aliases import Skills
 from src.services.actor import can_play_role, filter_actors_for_role
 
 

@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from pydantic import Field
 from typing_extensions import Annotated
 

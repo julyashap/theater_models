@@ -1,5 +1,3 @@
-import pytest
-
 from src.models.actor import Actor
 from src.models.production import Production
 from src.services.production import get_actor_by_role, get_cast_list, get_missing_roles
